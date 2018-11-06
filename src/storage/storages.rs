@@ -178,6 +178,12 @@ unsafe impl<T> DistinctStorage for NullStorage<T> {}
 #[derivative(Default(bound = ""))]
 pub struct VecStorage<T>(Vec<T>);
 
+impl<T> AsRef<Vec<T>> for VecStorage<T> {
+    fn as_ref(&self) -> &Vec<T> {
+        &self.0
+    }
+}
+
 impl<T> UnprotectedStorage<T> for VecStorage<T> {
     unsafe fn clean<B>(&mut self, has: B)
     where
